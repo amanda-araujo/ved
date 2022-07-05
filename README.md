@@ -9,4 +9,4 @@ Objetivo: Explorar Medidas de Concentração e Desigualdade a partir de dados do
   
 Arquivos de dados: 
   - 'WEO_Data.csv': dados originais disponíveis em www.imf.org
-  - df3cont: dados com a relação dos países por continente
+  - 'df3cont.csv': dados com a relação dos países por continente
