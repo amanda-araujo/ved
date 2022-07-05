@@ -1,0 +1,196 @@
+﻿Country;X2020;Continent
+São Tomé and Príncipe;0.477;Africa
+Seychelles;1.138;Africa
+Comoros;1.216;Africa
+Guinea-Bissau;1.434;Africa
+Cabo Verde;1.707;Africa
+The Gambia;1.862;Africa
+Lesotho;1.999;Africa
+Equatorial Guinea;10.036;Africa
+Republic of Congo;10.329;Africa
+Rwanda;10.332;Africa
+Namibia;10.71;Africa
+Chad;10.836;Africa
+Mauritius;10.921;Africa
+Kenya;102.427;Africa
+Malawi;11.847;Africa
+Morocco;114.602;Africa
+Madagascar;13.179;Africa
+Niger;13.761;Africa
+Mozambique;14.029;Africa
+Algeria;147.6;Africa
+Botswana;15.064;Africa
+Gabon;15.339;Africa
+Guinea;15.388;Africa
+Benin;15.674;Africa
+Mali;17.491;Africa
+Libya;19.21;Africa
+Zambia;19.319;Africa
+Eritrea;2.084;Africa
+Central African Republic;2.387;Africa
+Zimbabwe;21.924;Africa
+Senegal;24.681;Africa
+Liberia;3.037;Africa
+Burundi;3.04;Africa
+Djibouti;3.44;Africa
+Eswatini;3.981;Africa
+South Africa;335.344;Africa
+Sudan;34.396;Africa
+Egypt;363.245;Africa
+Uganda;38.141;Africa
+Tunisia;39.219;Africa
+Cameroon;39.938;Africa
+Sierra Leone;4.202;Africa
+South Sudan;4.44;Africa
+Somalia;4.99;Africa
+Nigeria;429.423;Africa
+Democratic Republic of the Congo;48.707;Africa
+Angola;58.376;Africa
+Côte d'Ivoire;61.231;Africa
+Tanzania;64.403;Africa
+Ghana;68.498;Africa
+Togo;7.586;Africa
+Mauritania;8.11;Africa
+Ethiopia;96.611;Africa
+Timor-Leste;1.777;Asia
+Kuwait;105.949;Asia
+Indonesia;1059.638;Asia
+Brunei Darussalam;12.003;Asia
+Mongolia;13.137;Asia
+Qatar;145.45;Asia
+Russia;1478.571;Asia
+China;14866.741;Asia
+West Bank and Gaza;15.561;Asia
+Korea;1638.258;Asia
+Iraq;169.488;Asia
+Burkina Faso;17.378;Asia
+Kazakhstan;171.24;Asia
+Lao P.D.R.;18.82;Asia
+Yemen;18.841;Asia
+Lebanon;19.008;Asia
+Bhutan;2.503;Asia
+Afghanistan;20.136;Asia
+Macao SAR;24.333;Asia
+Cambodia;25.192;Asia
+Pakistan;261.726;Asia
+India;2660.244;Asia
+Maldives;3.738;Asia
+Bangladesh;323.057;Asia
+Nepal;33.983;Asia
+Malaysia;337.008;Asia
+Singapore;339.981;Asia
+Bahrain;34.729;Asia
+Vietnam;343.114;Asia
+Hong Kong SAR;346.584;Asia
+United Arab Emirates;358.869;Asia
+Philippines;361.489;Asia
+Israel;407.101;Asia
+Azerbaijan;42.607;Asia
+Jordan;43.759;Asia
+Turkmenistan;45.609;Asia
+Thailand;501.712;Asia
+Japan;5045.101;Asia
+Uzbekistan;59.928;Asia
+Oman;63.368;Asia
+Taiwan Province of China;668.156;Asia
+Kyrgyz Republic;7.747;Asia
+Tajikistan;7.997;Asia
+Saudi Arabia;700.118;Asia
+Turkey;719.919;Asia
+Sri Lanka;80.7;Asia
+Myanmar;81.257;Asia
+Islamic Republic of Iran;835.351;Asia
+Dominica;0.544;CentralAmerica
+St. Vincent and the Grenadines;0.807;CentralAmerica
+St. Kitts and Nevis;0.981;CentralAmerica
+Antigua and Barbuda;1.37;CentralAmerica
+St. Lucia;1.617;CentralAmerica
+Belize;1.706;CentralAmerica
+Puerto Rico;103.138;CentralAmerica
+Nicaragua;12.62;CentralAmerica
+Jamaica;13.967;CentralAmerica
+Haiti;14.508;CentralAmerica
+Aruba;2.497;CentralAmerica
+Trinidad and Tobago;21.587;CentralAmerica
+Honduras;23.828;CentralAmerica
+El Salvador;24.639;CentralAmerica
+Barbados;4.418;CentralAmerica
+Panama;52.938;CentralAmerica
+Costa Rica;61.833;CentralAmerica
+Guatemala;77.603;CentralAmerica
+Dominican Republic;78.923;CentralAmerica
+The Bahamas;9.908;CentralAmerica
+Grenada;1.027;Europe
+San Marino;1.554;Europe
+Slovak Republic;104.491;Europe
+Moldova;11.912;Europe
+North Macedonia;12.288;Europe
+Armenia;12.641;Europe
+Spain;1280.459;Europe
+Albania;14.828;Europe
+Malta;14.899;Europe
+Georgia;15.891;Europe
+Hungary;155.013;Europe
+Ukraine;155.3;Europe
+Italy;1884.935;Europe
+Greece;189.259;Europe
+Bosnia and Herzegovina;19.789;Europe
+Andorra;2.858;Europe
+Iceland;21.718;Europe
+Portugal;228.356;Europe
+Cyprus;23.785;Europe
+Czech Republic;245.349;Europe
+Romania;248.716;Europe
+France;2624.416;Europe
+Finland;269.557;Europe
+United Kingdom;2709.678;Europe
+Estonia;30.626;Europe
+Latvia;33.478;Europe
+Denmark;356.085;Europe
+Norway;362.522;Europe
+Germany;3843.335;Europe
+Montenegro;4.786;Europe
+Ireland;425.549;Europe
+Austria;432.524;Europe
+Belgium;514.92;Europe
+Serbia;52.96;Europe
+Slovenia;53.547;Europe
+Sweden;541.064;Europe
+Lithuania;55.843;Europe
+Croatia;56.171;Europe
+Poland;595.916;Europe
+Belarus;60.201;Europe
+Bulgaria;69.209;Europe
+Kosovo;7.78;Europe
+Luxembourg;73.205;Europe
+Switzerland;751.877;Europe
+Netherlands;913.134;Europe
+Mexico;1073.915;NorthAmerica
+Canada;1644.037;NorthAmerica
+United States;20893.75;NorthAmerica
+Tuvalu;0.055;Oceania
+Nauru;0.114;Oceania
+Kiribati;0.198;Oceania
+Marshall Islands;0.244;Oceania
+Palau;0.257;Oceania
+Micronesia;0.407;Oceania
+Tonga;0.499;Oceania
+Samoa;0.812;Oceania
+Vanuatu;0.932;Oceania
+Solomon Islands;1.562;Oceania
+Australia;1359.372;Oceania
+New Zealand;209.384;Oceania
+Papua New Guinea;23.279;Oceania
+Fiji;4.494;Oceania
+Brazil;1444.718;SouthAmerica
+Suriname;2.884;SouthAmerica
+Peru;205.458;SouthAmerica
+Chile;252.821;SouthAmerica
+Colombia;271.554;SouthAmerica
+Paraguay;35.67;SouthAmerica
+Bolivia;36.839;SouthAmerica
+Argentina;389.064;SouthAmerica
+Venezuela;47.255;SouthAmerica
+Guyana;5.471;SouthAmerica
+Uruguay;56.577;SouthAmerica
+Ecuador;98.808;SouthAmerica
