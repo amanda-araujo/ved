@@ -1,0 +1,576 @@
+---
+title: "Dashboard - Meu diário cinematográfico"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns #rows
+    vertical_layout: fill
+    theme: united #cerulean
+runtime: shiny #funcionalidades do shiny: ex. barra de seleção
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+```
+
+Página 1
+=======================================================================
+
+Value Boxes {data-width=185}
+-------------------------------------
+
+### Total filmes
+
+```{r}
+valueBox(762, caption = "Filmes assistidos 2016 - 2022")#, icon = "fa-github")
+```
+
+### Média anual
+
+```{r}
+valueBox(123.6, caption = "Média filmes/ano", color = "info")#, icon = "fa-twitter")
+```
+
+### Tempo
+
+```{r}
+valueBox(58.5, caption = "Dias assisitindo filmes", color = "success")#, icon = "glyphicon-time")
+```
+
+### Países
+
+```{r}
+valueBox(43, caption = "Países", color = "warning")#, icon = "fa-facebook")
+```
+
+### Estrelas
+
+```{r}
+valueBox(3.57, caption = "Avaliação média", color = "danger")#, icon = "fa-facebook")
+```
+
+### Gêneros
+
+```{r}
+valueBox(19, caption = "Gêneros", color = "lightgray")#, icon = "fab fa-r-project")
+```
+
+### Idiomas
+
+```{r}
+valueBox(51, caption = "Idiomas", color = "lightblue")#, icon = "fab fa-r-project")
+```
+
+### 
+
+```{r}
+sliderInput("date_range", "Selecionar período", value = c(as.Date("2016-07-01", "%Y-%m-%d"),as.Date("2020-03-01", "%Y-%m-%d")),
+            min = as.Date("2016-06-01", "%Y-%m-%d"),
+            max = as.Date("2022-07-01", "%Y-%m-%d"))
+```
+
+Column {data-width=500} 
+-----------------------------------------------------------------------
+
+### Diário
+```{r}
+library(ggplot2)
+library(plotly)
+library(gapminder)
+library(scales)
+library(plyr)
+
+dados <- read.csv("filmes.csv", header=T)
+attach(dados)
+
+df_diario <- data.frame(dados)
+
+#Deletando colunas não informativas: 
+df_diario[1] <- NULL #'X'
+df_diario[4] <- NULL #Letterboxd.url
+df_diario[7] <- NULL #ID
+df_diario[12] <- NULL #voteavg
+df_diario[12] <- NULL #votecount
+df_diario[1] <- NULL #Date (data arbitrária)
+
+
+c = na.omit(as.Date(df_diario$Watched.Date, format = "%Y-%m-%d"))
+c = as.data.frame( as.Date(paste(format(c, "%Y-%m"), "-01",sep=""), "%Y-%m-%d"))
+colnames(c) <- c('Data')
+c <- plyr::count(c$Data)
+colnames(c) <- c('Data', 'Filmes')
+
+#ba = format(ba, "%Y-%m")
+#ba = count(ba)
+#ba$x = as.Date(paste(ba$x,"-01",sep=""), "%Y-%m-%d")
+
+renderPlotly({
+  
+  bab <- ggplot(data = c, aes(x = c$Data, y = c$Filmes)) +
+  geom_line(color = "pink") +
+  labs(x = "Data",
+       y = "Quantidade de filmes",
+       title = "Diário cinematográfico: Gráfico de linhas") +
+  scale_x_date(#breaks="12 month",
+               labels = date_format("%Y-%m"),
+  #limits = as.Date(c("2016-01-01", "2022-07-01"), "%Y-%m-%d") )+
+  limits = as.Date(c(input$date_range[1], input$date_range[2]), "%Y-%m-%d")) +
+  theme_bw() 
+  
+})
+  
+ 
+
+
+```
+
+
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+### Diário +
+
+```{r}
+
+
+#time series: my films letterboxd June 2016 - July 2022
+
+dados <- read.csv("filmes.csv", header=T)
+#View(dados)
+attach(dados)
+
+df_diario <- data.frame(dados)
+
+#Deletando colunas não informativas: 
+df_diario[1] <- NULL #'X'
+df_diario[4] <- NULL #Letterboxd.url
+df_diario[7] <- NULL #ID
+df_diario[12] <- NULL #voteavg
+df_diario[12] <- NULL #votecount
+df_diario[1] <- NULL #Date (data arbitrária)
+
+#Gráfico: filmes x data assistida (Watched.Date)
+#Data format: 2016-06-18 :: year-month-day (chr)
+
+# convert date column to date class
+df_diario$Watched.Date <- as.Date(df_diario$Watched.Date,
+                                  format = "%Y-%m-%d")
+#   ps: %Y - 4 digit year, %y - 2 digit year, %m - month, %d - day
+
+# view R class of data
+#class(df_diario$Watched.Date)
+## [1] "Date" OK
+
+# view results
+#head(df_diario$Watched.Date)
+
+#interativo! :D
+library(plotly)
+library(scales)
+p <- ggplot(data = df_diario, aes(x = Watched.Date, y = Name)) +
+  geom_point() +
+  labs(x = "Data",
+       y = "Filmes", 
+       title = "Diário: Raster Plot") +
+  theme(axis.ticks.y = element_blank(), #retira valores do eixo y
+        axis.text.y = element_blank()) +
+  scale_x_date(breaks="year",
+               labels = date_format("%Y"))
+ggplotly(p)
+
+
+```
+
+
+
+
+Página 2
+==============================================================================
+
+Column {data-width=300}
+---
+
+### Boxplot - Ratings
+```{r}
+#Ratings (estrelas)
+
+dados <- read.csv("filmes.csv", header=T)
+attach(dados)
+
+#Boxplot
+library(plotly)
+
+ratings <- dados$Rating
+#NaN: filmes assistidos, mas não avaliados
+
+#Omitir entradas com NaN em Rating
+ratings <- na.omit(ratings)
+#length(ratings) #727 filmes avaliados
+
+ratings <- data.frame(ratings)
+#View(ratings)
+
+fig <- plot_ly(data=ratings, y=~ratings, type = "box",
+               name = "Estrelas",
+               marker = list(color = 'rgb(0,0,0)',
+                             outliercolor = 'rgba(219, 64, 82, 0.6)'),
+               line = list(color = 'rgb(0,0,0)'))
+fig
+```
+
+### Tabela - Ratings
+```{r}
+library(DT)
+
+renderDT(datatable(df_diario[c('Name', 'Rating')]))
+```
+
+Column {data-width=300}
+---
+### Histograma - Ratings
+
+```{r}
+dados <- read.csv("filmes.csv", header=T)
+attach(dados)
+
+h <- hist(Rating,
+          main = 'Distribuição avaliação dos filmes',
+          xlim = c(0,5),
+          ylim = c(0,200),
+          xlab = 'Rating',
+          ylab = 'Frequência',
+          col="darkmagenta") 
+text(h$mids,h$counts,labels=h$counts, adj=c(0.5, -0.5))
+
+legend(x =0.05, y =195, 
+       legend = c("727 filmes avaliados"),
+       border = NULL
+       )
+
+```
+
+### Gráfico de linha - Data de Lançamento
+```{r}
+
+library(ggplot2)
+library(plotly)
+library(gapminder)
+library(scales)
+library(plyr)
+
+dados <- read.csv("filmes.csv", header=T)
+attach(dados)
+
+df_diario <- data.frame(dados)
+
+#Deletando colunas não informativas: 
+df_diario[1] <- NULL #'X'
+df_diario[4] <- NULL #Letterboxd.url
+df_diario[7] <- NULL #ID
+df_diario[12] <- NULL #voteavg
+df_diario[12] <- NULL #votecount
+df_diario[1] <- NULL #Date (data arbitrária)
+
+
+b = na.omit(as.Date(df_diario$releasedate, format = "%Y-%m-%d"))
+b = format(b, "%Y")
+b = plyr::count(b)
+b$x = as.Date(paste(b$x,"-01-01",sep=""), "%Y-%m-%d")
+
+#plot(b$x, b$freq, "l")
+  
+  d <- ggplot(data = b, aes(x = x, y = freq)) +
+  geom_line(color = "orange") +
+  labs(x = "Data lançamento",
+       y = "Filmes", 
+       title = "Data de lançamento x frequência") +
+  scale_x_date(breaks="10 years",
+               labels = date_format("%Y")) +
+    #scale_y_continuous(limits = c(0, 80)) +
+  #limits = as.Date(c('2016-01-01', '2022-07-01'))) 
+  theme_bw()
+ggplotly(d)
+
+
+```
+
+
+Column {data-width=400}
+---
+### Diário ++
+```{r}
+#Data assistido x Data lançamento x rating x duração x nome
+library(ggplot2)
+library(plotly)
+library(gapminder)
+library(scales)
+
+dados <- read.csv("filmes.csv", header=T)
+attach(dados)
+
+df_diario <- data.frame(dados)
+
+#Deletando colunas não informativas: 
+df_diario[1] <- NULL #'X'
+df_diario[4] <- NULL #Letterboxd.url
+df_diario[7] <- NULL #ID
+df_diario[12] <- NULL #voteavg
+df_diario[12] <- NULL #votecount
+df_diario[1] <- NULL #Date (data arbitrária)
+
+#Watched.Date, releasedate: chr
+# convert date column to date class
+df_diario$Watched.Date <- as.Date(df_diario$Watched.Date,
+                                  format = "%Y-%m-%d")
+df_diario$releasedate <- as.Date(df_diario$releasedate,
+                                  format = "%Y-%m-%d")
+#   ps: %Y - 4 digit year, %y - 2 digit year, %m - month, %d - day
+
+
+
+v <- ggplot(data = df_diario, aes(x = releasedate, y = Watched.Date, label = Name, color = Rating, size = runtime)) +
+  geom_point() +
+  labs(x = "Data lançamento",
+       y = "Data assistida", 
+       title = "Data de lançamento x Data assistida x Rating x Duração") +
+  scale_x_date(breaks="10 years",
+               labels = date_format("%Y")) + #,
+  #limits = as.Date(c('2016-01-01', '2022-07-01'))) 
+  scale_y_date(breaks="year",
+               labels = date_format("%Y"),
+               limits = as.Date(c('2016-01-01', '2022-07-30'))) +
+  theme_bw()
+ggplotly(v)
+
+```
+
+
+
+Página 3
+=======================================================================
+
+Column {.tabset data-width=700} 
+-----------------------------------------------------------------------
+### Mapa-mundi
+```{r}
+
+
+#PAÍSES
+paises <- read.csv("C:/Users/Amanda/Documents/dashboard-ved/country_freq.csv") 
+#View(paises)
+attach(paises)
+
+library(ggplot2)
+
+df_paises <- data.frame(paises)
+#df_paises
+
+#Deletando a coluna 'n' (não informativa):
+df_paises[1] <- NULL
+#View(df_paises)
+
+#Mudando nome das colunas de df
+colnames(df_paises) <- c('País', 'Frequência')
+
+#Representação gráfica: mapa-mundi
+library(WDI)
+library(highcharter)
+library(dplyr)
+library(maps)
+
+#coutries:
+#df_paises$País
+
+#lista códigos ISO:
+#Disponível em: https://www.iban.com/country-codes
+iso3 <- c("USA", "DEU", "FRA", "ESP", "POL", "GBR", "PRT", "CHE", "HUN",
+          "MEX", "BRA", "CAN", "IRL", "CHN", "HKG", "TWN", "BEL", "BHS",
+          "CZE", "ARG", "KOR", "NLD", "NOR", "SWE", "NZL", "TUR", "JPN",
+          "MAR", "ITA", "DNK", "MLT", "SRB", "AUS", "ZAF", "PRI", "GRC",
+          "ARE", "MYS", "KEN", "AUT", "SVK", "RUS", "IRN")
+#Ps: SUN (URSS) -> RUS
+#length(iso3)
+
+#Combinar dados país-frequência com os códigos ISO3:
+df_paises$ISO <- iso3
+#df_paises
+
+#Mapa
+library(rworldmap)
+
+#gera info
+mapa <- joinCountryData2Map(df_paises
+                    , joinCode = "ISO3" 
+                    , nameJoinColumn = "ISO"
+                    , nameCountryColumn = "País"
+                    , suggestForFailedCodes = FALSE 
+                    , mapResolution="coarse" 
+                    , projection=NA #DEPRECATED
+                    , verbose = FALSE   
+)
+
+#plota mapa
+mapCountryData( mapa
+                , nameColumnToPlot="Frequência"
+                , numCats=10
+                , mapTitle= "País de produção"
+                , catMethod=c(1, 5, 10, 20, 30, 50, 70, 125, 629)
+                , colourPalette="negpos8"
+)
+
+```
+
+### Curva de Lorenz
+```{r}
+#Curva de Lorenz
+library(ineq)
+
+paises <- read.csv("C:/Users/Amanda/Documents/dashboard-ved/country_freq.csv") 
+attach(paises)
+
+df_paises2 <- data.frame(paises)
+
+#Deletando a coluna 'n' (não informativa):
+df_paises2[1] <- NULL
+
+#Mudando nome das colunas de df
+colnames(df_paises2) <- c('País', 'Frequência')
+
+lorenz_pais = Lc(df_paises2$Frequência)
+
+#Índice de Gini
+G = Gini(df_paises2$Frequência)
+G = round(G, 2) #2 casas decimais
+
+lc <- lorenz_pais
+
+plot(lorenz_pais, 
+     main='País de produção'
+     , col=1
+     , xaxt='n' #retira valores do eixo x
+     , xlab = 'País de produção'
+     , ylab = 'Local de produção')
+segments(lc$p[43], 0, lc$p[43], lc$L[43], lty=2, col="#8b0000") #USA
+segments(lc$p[42], 0, lc$p[42], lc$L[42], lty=2, col="red") #UK
+segments(lc$p[41], 0, lc$p[41], lc$L[41], lty=2, col="orange") #FRA
+segments(lc$p[40], 0, lc$p[40], lc$L[40], lty=2, col="yellow") #ALE
+segments(lc$p[39], 0, lc$p[39], lc$L[39], lty=2, col="yellow") #BRA yellow
+segments(lc$p[38], 0, lc$p[38], lc$L[38], lty=2, col="#90ee90") #ESP
+segments(lc$p[37], 0, lc$p[37], lc$L[37], lty=2, col="#90ee90") #CAN
+
+legend(x=0.05,y=0.9, legend = c("43 países de produção",
+                                "EUA",
+                                "UK",
+                                "França",
+                                "Alemanha",
+                                "Brasil",
+                                "Espanha",
+                                "Canada"),
+       title = paste('Índice de Gini: G =', G),  # Title
+       title.adj = 0.5,         # Horizontal adjustment of the title
+       title.col = "#b30000",   # Color of the title
+       bg = "white",
+       lty = c(1, 2, 2, 2, 2, 2, 2, 1), col = c(1, "#8b0000", "red", "orange", "yellow", "yellow", "#90ee90", "#90ee90"), lwd = 2)
+```
+
+
+Column {data-width=300} 
+-----------------------------------------------------------------------
+
+
+### Gráfico de barras
+```{r}
+#GÊNEROS: Gráfico de barras
+
+generos <- read.csv("C:/Users/Amanda/Documents/dashboard-ved/genre_freq.csv") 
+#View(generos)
+attach(generos)
+
+library(ggplot2)
+
+df_generos <- data.frame(generos)
+#df_generos
+
+#Mudando nome das colunas de df
+colnames(df_generos) <- c('n', 'Gênero', 'Frequência')
+#df_generos
+
+#Acessando cada variável de df
+#df_generos$Gênero
+#df_generos$Frequência
+
+len = length(df_generos$Frequência)
+#df_generos$Gênero[2]
+
+#Somatória freq: total filmes
+total <- 0
+for (i in 1:len)
+  total <- total + df_generos$Frequência[i]
+#total
+
+#Deletando a coluna 'n' (não informativa):
+df_generos[1] <- NULL
+#View(df_generos)
+
+#df_generos[1]
+#df_generos[2]
+
+#Representação tabular
+#já tenho uma tabela de frequências!
+
+#Sorting data (by freq *-: descendente)
+df_generos <- df_generos[order(df_generos$Frequência),]
+
+# Increase margin size
+par(family = "times", font = 1, font.lab = 2, font.axis = 2, mar = c(6, 8, 4, 4))
+
+#par(mar=c(6,8,4,4)) #bottom, left, top, right
+#The default is c(5, 4, 4, 2) + 0.1.
+
+#Representação variáveis qualitativas em R
+barplot(height = df_generos$Frequência, 
+        names = df_generos$Gênero,
+        main = 'Gêneros',
+        xlab = "Frequência",
+        ylab = NULL, #"Gênero",
+        xlim = c(0,400),
+        col = rainbow(19),
+        horiz = TRUE,
+        las = 1)
+
+```
+
+### Treemapping
+```{r}
+#GÊNEROS: treemap
+generos <- read.csv("C:/Users/Amanda/Documents/dashboard-ved/genre_freq.csv") 
+attach(generos)
+
+library(ggplot2)
+
+df_generos <- data.frame(generos)
+
+#Mudando nome das colunas de df
+colnames(df_generos) <- c('n', 'Gênero', 'Frequência')
+
+#Deletando a coluna 'n' (não informativa):
+df_generos[1] <- NULL
+
+#Sorting data (by freq *-: descendente)
+df_generos <- df_generos[order(df_generos$Frequência),]
+
+# TREEMAP (quadrados: área)
+#install.packages('treemap')
+library(treemap)
+
+treemap(dtf = df_generos, #data
+        index = "Gênero",
+        vSize = "Frequência",
+        type = "index",
+        title = "Gêneros",
+        palette = ("Dark2")
+        )
+```
+
+
+
+

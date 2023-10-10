@@ -1,0 +1,17 @@
+Dashboard - VED (Projeto Final)
+
+flexydashboard : Pacote em R
+
+aba dinâmica
+algumas funcionalisdades do Shiny
+ggplot
+como função do plotlib (passa o mouse: aparece o layout od que está sendo apresentado)
+
+=== : indica página
+--- : indica coluna quando colocado abaixo do nome Colunm
+
+
+
+
+
+
