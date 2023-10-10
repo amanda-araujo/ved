@@ -1,4 +1,4 @@
-#Medidas de Concentração e Desigualdade
+#Medidas de ConcentraÃ§Ã£o e Desigualdade
 #Por Amanda Araujo & Alex Prestes
 
 #install.packages("ineq")
@@ -18,22 +18,22 @@ pib <- sort(df2)
 # Curva de Lorenz
 clorenz_pib = Lc(pib)
 
-#índice de Gini
+#Ã­ndice de Gini
 G = Gini(pib)
 G = round(Gini(pib), 2) #2 casas decimais
 
 
 # Curva de Lorenz + Gini + Br
-plot(clorenz_pib, main='Curva de Lorenz PIB global 2020', col=1,  xlab = 'Países', ylab = 'PIB global')
+plot(clorenz_pib, main='Curva de Lorenz PIB global 2020', col=1,  xlab = 'PaÃ­ses', ylab = 'PIB global')
 segments(lc$p[184], 0, lc$p[184], lc$L[184], lty=2, col="green") #Brasil
 legend(x=0.05,y=0.9, legend = c("Global", "Brasil"),
-                 title = paste('Índice de Gini: G =', G),  # Title
+                 title = paste('Ãndice de Gini: G =', G),  # Title
                  title.adj = 0.5,         # Horizontal adjustment of the title
                  title.col = "#b30000",   # Color of the title
                  lty = c(1, 2), col = c(1, 3), lwd = 2)
 
 # colorindo o globo...
-plot(clorenz_pib, main='Curva de Lorenz PIB global 2020', col=1,  xlab = 'Países', ylab = 'PIB global')
+plot(clorenz_pib, main='Curva de Lorenz PIB global 2020', col=1,  xlab = 'PaÃ­ses', ylab = 'PIB global')
 
 dfcolorcode = data.frame(
   continent = c("Global", "SouthAmerica", "Africa",   "Asia", "CentralAmerica", "Europe", "NorthAmerica", "Oceania"),
@@ -53,18 +53,18 @@ polygon(x = clorenz_pib$p,  # X-Coordinates of polygon
 lines(clorenz_pib, lwd=3)
 
 dfcolorcodeleg = data.frame(
-continentleg = c("Global", 'América do Norte', 'Ásia', 'Europa', 'América do Sul', 'Oceania', "África", "América Central"),
+continentleg = c("Global", 'AmÃ©rica do Norte', 'Ãsia', 'Europa', 'AmÃ©rica do Sul', 'Oceania', "Ãfrica", "AmÃ©rica Central"),
 colorleg = c(1, 'red', 'orange', 'blue', 'green', '#ffff00', 6, 8)
 )
 
 legend(x=0.02,y=0.98, legend = dfcolorcodeleg$continentleg,
-       title = paste('Índice de Gini: G =', G),  # Title
+       title = paste('Ãndice de Gini: G =', G),  # Title
        title.adj = 0.5,         # Horizontal adjustment of the title
        title.col = "#b30000",   # Color of the title
        lty = c(1, 1), col = dfcolorcodeleg$colorleg, lwd = 2)
 
 # Zoom...
-plot(clorenz_pib, main='Curva de Lorenz PIB global 2020', col=1,  xlab = 'Países', ylab = 'PIB global', xlim=c(0,0.5),ylim=c(0,0.02))
+plot(clorenz_pib, main='Curva de Lorenz PIB global 2020', col=1,  xlab = 'PaÃ­ses', ylab = 'PIB global', xlim=c(0,0.5),ylim=c(0,0.02))
 
 n=1
 for (cont in df3c$Continent) {
@@ -78,7 +78,7 @@ polygon(x = clorenz_pib$p,  # X-Coordinates of polygon
 lines(clorenz_pib, lwd=3)
 
 legend(x=0.05,y=0.018, legend = dfcolorcodeleg$continentleg,
-       title = paste('Índice de Gini: G =', G),  # Title
+       title = paste('Ãndice de Gini: G =', G),  # Title
        title.adj = 0.5,         # Horizontal adjustment of the title
        title.col = "#b30000",   # Color of the title
        lty = c(1, 1), col = dfcolorcodeleg$colorleg, lwd = 2)
@@ -90,7 +90,7 @@ clorenz_pib = Lc(pib_top)
 G = Gini(pib_top)
 G = round(Gini(pib_top), 2) #2 casas decimais
 
-plot(clorenz_pib, main='Curva de Lorenz PIB global 2020 - Top 50%', col=1,  xlab = 'Países', ylab = 'PIB global')
+plot(clorenz_pib, main='Curva de Lorenz PIB global 2020 - Top 50%', col=1,  xlab = 'PaÃ­ses', ylab = 'PIB global')
 
 n=1
 for (cont in df3c$Continent[99:195]) {
@@ -104,7 +104,7 @@ polygon(x = clorenz_pib$p,  # X-Coordinates of polygon
 lines(clorenz_pib, lwd=3)
 
 legend(x=0.02,y=0.98, legend = dfcolorcodeleg$continentleg,
-       title = paste('Índice de Gini: G =', G),  # Title
+       title = paste('Ãndice de Gini: G =', G),  # Title
        title.adj = 0.5,         # Horizontal adjustment of the title
        title.col = "#b30000",   # Color of the title
        lty = c(1, 1), col = dfcolorcodeleg$colorleg, lwd = 2)
@@ -116,7 +116,7 @@ clorenz_pib = Lc(pib_bottom)
 G = Gini(pib_bottom)
 G = round(Gini(pib_bottom), 2) #2 casas decimais
 
-plot(clorenz_pib, main='Curva de Lorenz PIB global 2020 - Bottom 50%', col=1,  xlab = 'Países', ylab = 'PIB global')
+plot(clorenz_pib, main='Curva de Lorenz PIB global 2020 - Bottom 50%', col=1,  xlab = 'PaÃ­ses', ylab = 'PIB global')
 
 n=1
 for (cont in df3c$Continent[1:98]) {
@@ -130,19 +130,19 @@ polygon(x = clorenz_pib$p,  # X-Coordinates of polygon
 lines(clorenz_pib, lwd=3)
 
 legend(x=0.02,y=0.98, legend = dfcolorcodeleg$continentleg,
-       title = paste('Índice de Gini: G =', G),  # Title
+       title = paste('Ãndice de Gini: G =', G),  # Title
        title.adj = 0.5,         # Horizontal adjustment of the title
        title.col = "#b30000",   # Color of the title
        lty = c(1, 1), col = dfcolorcodeleg$colorleg, lwd = 2)
 
-#Reunião G20 *na verdade, Top20, leves alterações 
+#ReuniÃ£o G20 *na verdade, Top20, leves alteraÃ§Ãµes 
 pib_G20 = pib[176:195]
 
 clorenz_pib = Lc(pib_G20)
 G = Gini(pib_G20)
 G = round(Gini(pib_G20), 2) #2 casas decimais
 
-plot(clorenz_pib, main='Curva de Lorenz PIB global 2020 - G20', col=1,  xlab = 'Países', ylab = 'PIB global')
+plot(clorenz_pib, main='Curva de Lorenz PIB global 2020 - G20', col=1,  xlab = 'PaÃ­ses', ylab = 'PIB global')
 
 n=1
 for (cont in df3c$Continent[176:195]) {
@@ -156,24 +156,24 @@ polygon(x = clorenz_pib$p,  # X-Coordinates of polygon
 lines(clorenz_pib, lwd=3)
 
 legend(x=0.02,y=0.98, legend = dfcolorcodeleg$continentleg,
-       title = paste('Índice de Gini: G =', G),  # Title
+       title = paste('Ãndice de Gini: G =', G),  # Title
        title.adj = 0.5,         # Horizontal adjustment of the title
        title.col = "#b30000",   # Color of the title
        lty = c(1, 1), col = dfcolorcodeleg$colorleg, lwd = 2)
-#Juntos, os integrantes do G20 representam cerca de 80% da produção econômica mundial,
-#dois terços da população global e três quartos do comércio internacional.
-#Os integrantes do G20 são a Argentina, Austrália, Brasil, Canadá, China, França, Alemanha, Índia, Indonésia,
-#Itália, Japão, México, República da Coreia, Rússia, Arábia Saudita, África do Sul, Turquia, Reino Unido, Estados Unidos
-#e União Europeia. Ao longo do ano, representantes dos países se reúnem para discutir questões financeiras e socioeconômicas.
+#Juntos, os integrantes do G20 representam cerca de 80% da produÃ§Ã£o econÃ´mica mundial,
+#dois terÃ§os da populaÃ§Ã£o global e trÃªs quartos do comÃ©rcio internacional.
+#Os integrantes do G20 sÃ£o a Argentina, AustrÃ¡lia, Brasil, CanadÃ¡, China, FranÃ§a, Alemanha, Ãndia, IndonÃ©sia,
+#ItÃ¡lia, JapÃ£o, MÃ©xico, RepÃºblica da Coreia, RÃºssia, ArÃ¡bia Saudita, Ãfrica do Sul, Turquia, Reino Unido, Estados Unidos
+#e UniÃ£o Europeia. Ao longo do ano, representantes dos paÃ­ses se reÃºnem para discutir questÃµes financeiras e socioeconÃ´micas.
 # Curva de Lorenz + Gini + Br
 
 # Curva de Lorenz
 clorenz_pib = Lc(pib)
 
-#índice de Gini
+#Ã­ndice de Gini
 G = Gini(pib)
 G = round(Gini(pib), 2) #2 casas decimais
-plot(clorenz_pib, main='Curva de Lorenz PIB global 2020', col=1,  xlab = 'Países', ylab = 'PIB global')
+plot(clorenz_pib, main='Curva de Lorenz PIB global 2020', col=1,  xlab = 'PaÃ­ses', ylab = 'PIB global')
 
 n=176
 for (cont in df3c$Continent[176:195]) {
@@ -193,7 +193,7 @@ segments(0, clorenz_pib$L[176], clorenz_pib$p[176], clorenz_pib$L[176], lty=2, c
 riqueza_G20 = round((1 - clorenz_pib$L[176])*100, 1)
 
 legend(x=0.05,y=0.9, legend = c("Global", paste("Top20:", riqueza_G20, '%')),
-       title = paste('Índice de Gini: G =', G),  # Title
+       title = paste('Ãndice de Gini: G =', G),  # Title
        title.adj = 0.5,         # Horizontal adjustment of the title
        title.col = "#b30000",   # Color of the title
        lty = c(1, 2), col = c(1, '#6600cc'), lwd = 2)
@@ -203,10 +203,10 @@ pib = df3c[df3c$Continent=="SouthAmerica", ]$X2020
 # Curva de Lorenz
 clorenz_pib = Lc(pib)
 
-#índice de Gini
+#Ã­ndice de Gini
 G = Gini(pib)
 G = round(Gini(pib), 2) #2 casas decimais
-plot(clorenz_pib, main='Curva de Lorenz PIB América do Sul 2020', col=1,  xlab = 'Países', ylab = 'PIB global')
+plot(clorenz_pib, main='Curva de Lorenz PIB AmÃ©rica do Sul 2020', col=1,  xlab = 'PaÃ­ses', ylab = 'PIB global')
 
 n=1
 for (cont in df3c[df3c$Continent=="SouthAmerica", ]$Continent) {
@@ -223,8 +223,8 @@ lines(clorenz_pib, lwd=3)
 segments(0, clorenz_pib$L[12], clorenz_pib$p[12], clorenz_pib$L[12], lty=2, col=3) #br riqueza 
 
 riqueza_br = round((1 - clorenz_pib$L[12])*100, 1)
-legend(x=0.05,y=0.9, legend = c("América do Sul", paste("Brasil:", riqueza_br, '%')),
-       title = paste('Índice de Gini: G =', G),  # Title
+legend(x=0.05,y=0.9, legend = c("AmÃ©rica do Sul", paste("Brasil:", riqueza_br, '%')),
+       title = paste('Ãndice de Gini: G =', G),  # Title
        title.adj = 0.5,         # Horizontal adjustment of the title
        title.col = "#b30000",   # Color of the title
        lty = c(1, 2), col = c(1, rgb(0, 1, 0)), lwd = 2)
@@ -234,10 +234,10 @@ pib = df3c[df3c$Continent=="Asia", ]$X2020
 # Curva de Lorenz
 clorenz_pib = Lc(pib)
 
-#índice de Gini
+#Ã­ndice de Gini
 G = Gini(pib)
 G = round(Gini(pib), 2) #2 casas decimais
-plot(clorenz_pib, main='Curva de Lorenz PIB Ásia 2020', col=1,  xlab = 'Países', ylab = 'PIB global')
+plot(clorenz_pib, main='Curva de Lorenz PIB Ãsia 2020', col=1,  xlab = 'PaÃ­ses', ylab = 'PIB global')
 
 n=1
 len_df = length(clorenz_pib$p)-1
@@ -255,8 +255,8 @@ lines(clorenz_pib, lwd=3)
 segments(0, clorenz_pib$L[len_df], clorenz_pib$p[len_df], clorenz_pib$L[len_df], lty=2, col='#ffff00') #china riqueza 
 
 riqueza_ch = round((1 - clorenz_pib$L[len_df])*100, 1)
-legend(x=0.05,y=0.9, legend = c("Ásia", paste("China:", riqueza_ch, '%')),
-       title = paste('Índice de Gini: G =', G),  # Title
+legend(x=0.05,y=0.9, legend = c("Ãsia", paste("China:", riqueza_ch, '%')),
+       title = paste('Ãndice de Gini: G =', G),  # Title
        title.adj = 0.5,         # Horizontal adjustment of the title
        title.col = "#b30000",   # Color of the title
        lty = c(1, 2), col = c(1, rgb(1, 1, 0)), lwd = 2)
@@ -267,7 +267,7 @@ clorenz_pib = Lc(pib)
 
 G = Gini(pib)
 G = round(Gini(pib), 2) #2 casas decimais
-plot(clorenz_pib, main='Curva de Lorenz PIB África 2020', col=1,  xlab = 'Países', ylab = 'PIB global')
+plot(clorenz_pib, main='Curva de Lorenz PIB Ãfrica 2020', col=1,  xlab = 'PaÃ­ses', ylab = 'PIB global')
 
 n=1
 len_df = length(clorenz_pib$p)-1
@@ -284,8 +284,8 @@ lines(clorenz_pib, lwd=3)
 segments(0, clorenz_pib$L[len_df], clorenz_pib$p[len_df], clorenz_pib$L[len_df], lty=2, col='#ff00ff') # riqueza 
 
 riqueza_ch = round((1 - clorenz_pib$L[len_df])*100, 1)
-legend(x=0.05,y=0.9, legend = c("África", paste("Nigéria:", riqueza_ch, '%')),
-       title = paste('Índice de Gini: G =', G),  # Title
+legend(x=0.05,y=0.9, legend = c("Ãfrica", paste("NigÃ©ria:", riqueza_ch, '%')),
+       title = paste('Ãndice de Gini: G =', G),  # Title
        title.adj = 0.5,         # Horizontal adjustment of the title
        title.col = "#b30000",   # Color of the title
        lty = c(1, 2), col = c(1, rgb(1, 0, 1)), lwd = 2)
@@ -296,7 +296,7 @@ clorenz_pib = Lc(pib)
 
 G = Gini(pib)
 G = round(Gini(pib), 2) #2 casas decimais
-plot(clorenz_pib, main='Curva de Lorenz PIB Europa 2020', col=1,  xlab = 'Países', ylab = 'PIB global')
+plot(clorenz_pib, main='Curva de Lorenz PIB Europa 2020', col=1,  xlab = 'PaÃ­ses', ylab = 'PIB global')
 
 n=1
 len_df = length(clorenz_pib$p)-1
@@ -319,7 +319,7 @@ segments(0, clorenz_pib$L[len_df-1], clorenz_pib$p[len_df-1], clorenz_pib$L[len_
 riqueza_al = round((1 - clorenz_pib$L[len_df])*100, 1)
 riqueza_ru = round((1 - clorenz_pib$L[len_df-1])*100 - riqueza_al, 1)
 legend(x=0.05,y=0.9, legend = c("Europa", paste("Alemanha:", riqueza_al, '%'), paste("Reino Unido:", riqueza_ru, '%')),
-       title = paste('Índice de Gini: G =', G),  # Title
+       title = paste('Ãndice de Gini: G =', G),  # Title
        title.adj = 0.5,         # Horizontal adjustment of the title
        title.col = "#b30000",   # Color of the title
        lty = c(1, 2, 2), col = c(1, rgb(0, 0, 1), rgb((len_df-n)/len_df, (len_df-n)/len_df, n/len_df)), lwd = 2)
@@ -330,7 +330,7 @@ clorenz_pib = Lc(pib)
 
 G = Gini(pib)
 G = round(Gini(pib), 2) #2 casas decimais
-plot(clorenz_pib, main='Curva de Lorenz PIB Oceania 2020', col=1,  xlab = 'Países', ylab = 'PIB global')
+plot(clorenz_pib, main='Curva de Lorenz PIB Oceania 2020', col=1,  xlab = 'PaÃ­ses', ylab = 'PIB global')
 
 n=1
 len_df = length(clorenz_pib$p)-1
@@ -351,8 +351,8 @@ segments(0, clorenz_pib$L[len_df-1], clorenz_pib$p[len_df-1], clorenz_pib$L[len_
 riqueza_au = round((1 - clorenz_pib$L[len_df])*100, 1)
 riqueza_nz = round((1 - clorenz_pib$L[len_df-1])*100 - riqueza_au, 1)
        
-legend(x=0.05,y=0.9, legend = c("Oceania", paste("Austrália:", riqueza_au, '%'), paste("Nova Zelândia:", riqueza_nz, '%')),
-       title = paste('Índice de Gini: G =', '0.90'),  # Title
+legend(x=0.05,y=0.9, legend = c("Oceania", paste("AustrÃ¡lia:", riqueza_au, '%'), paste("Nova ZelÃ¢ndia:", riqueza_nz, '%')),
+       title = paste('Ãndice de Gini: G =', '0.90'),  # Title
        title.adj = 0.5,         # Horizontal adjustment of the title
        title.col = "#b30000",   # Color of the title
        lty = c(1, 2, 2), col = c(1, rgb(1, 1, 0), rgb(n/len_df, n/len_df, (len_df-n)/len_df)), lwd = 2)
@@ -362,7 +362,7 @@ pib = df3c[df3c$Continent=="CentralAmerica", ]$X2020
 clorenz_pib = Lc(pib)
 G = Gini(pib)
 G = round(Gini(pib), 2) #2 casas decimais
-plot(clorenz_pib, main='Curva de Lorenz PIB América Central 2020', col=1,  xlab = 'Países', ylab = 'PIB global')
+plot(clorenz_pib, main='Curva de Lorenz PIB AmÃ©rica Central 2020', col=1,  xlab = 'PaÃ­ses', ylab = 'PIB global')
 
 n=1
 len_df = length(clorenz_pib$p)-1
@@ -379,8 +379,8 @@ lines(clorenz_pib, lwd=3)
 segments(0, clorenz_pib$L[len_df], clorenz_pib$p[len_df], clorenz_pib$L[len_df], lty=2, col='#ff8000') # riqueza 
 
 riqueza_ch = round((1 - clorenz_pib$L[len_df])*100, 1)
-legend(x=0.05,y=0.9, legend = c("América Central", paste("Porto Rico:", riqueza_ch, '%')),
-       title = paste('Índice de Gini: G =', G),  # Title
+legend(x=0.05,y=0.9, legend = c("AmÃ©rica Central", paste("Porto Rico:", riqueza_ch, '%')),
+       title = paste('Ãndice de Gini: G =', G),  # Title
        title.adj = 0.5,         # Horizontal adjustment of the title
        title.col = "#b30000",   # Color of the title
        lty = c(1, 2), col = c(1, rgb(1, 1/2, 0)), lwd = 2)
